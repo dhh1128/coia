@@ -1,0 +1,20 @@
+title: COIA
+description: generate aliases for opaque identifiers
+author:
+  name: "Daniel Hardman"
+  twitter: "dhh1128"
+  email: "daniel.hardman@gmail.com"
+plugins:
+  - jekyll-remote-theme
+  - jekyll-sitemap
+remote_theme: pages-themes/minimal@v0.2.0
+show_downloads: false
+include:
+  - robots.txt
+  - LICENSE
+  - "*.html"
+  - "*.js"
+  - "*.py"
+  - "*.java"
+  - "*.go"
+  - "*.rs"

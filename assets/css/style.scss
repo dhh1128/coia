@@ -1,0 +1,97 @@
+---
+---
+
+@import "{{ site.theme }}";
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 12pt;
+    background-color: white;
+    color: #444;
+}
+h1, h2, h3 {
+    font-family: 'Barlow Condensed';
+}
+h1 {
+    font-weight: 500;
+    font-size: 20pt;
+    color: #491705;
+}
+h2, label {
+    font-weight: 400;
+    font-size: 15pt;
+}
+h3 {
+    font-weight: 300;
+    font-size: 13pt;
+    color: #666666;
+}
+.hash {
+    font-family: 'Barlow Condensed';
+    font-weight: 300;
+    color: #491705;
+}
+footer {
+    font-size: 92%;
+    font-weight: 300;
+    color: #666666;
+    font-style: italic;
+}
+a { 
+    color: #914f37;
+    border-bottom: solid 1px #e0b69c;
+}
+a:hover {
+    font-weight: inherit;
+    color: #491705;
+    border-bottom: double #765043;
+}
+a:visited { color: #765043 }
+label, textarea, input[type="text"] {
+    width: 100%;
+    display: block;
+}
+textarea {
+    background-color: white;
+}
+textarea:read-only, input[type="text"]:read-only {
+    background-color: #fbf6f3;
+}
+label {
+  padding-top: 1em;
+}
+button {
+    margin-top: 4px;
+    background-color: #d1c5c0;
+    color: #491705;
+    padding: 0.3em 0.6em;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 107%;
+    border-color: #8d6d62;
+}
+button:hover {
+    background-color: #baa8a1;
+}
+label.copier {
+    background-repeat: no-repeat;
+    background-position: right bottom 4px;
+    background-image: url("{{ site.baseurl }}/assets/copy-icon.png");
+}
+@keyframes copiedAnimation {
+    0% {
+        background-color: initial; /* Start with the initial color */
+    }
+    50% {
+        background-color: #e4bfa8; /* At 50%, the background becomes beige */
+    }
+    100% {
+        background-color: initial; /* Return to the original color */
+    }
+}
+.copied {
+    animation: copiedAnimation 0.5s ease-in-out;
+}
