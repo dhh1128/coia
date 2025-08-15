@@ -4,8 +4,8 @@ This spec explains [how to generate](#conventions) consistent, human-friendly al
 
 * cecilia-as-second-violin-at-vienna-symphony
 * moi-en-tant-que-directeur-général-chez-loréal ("Me as CEO at L'Oréal")
-* 0-トヨタサプライチェーンでの購買者として ("Toyota as purchaser in supply chain")
-* 2-علي-بصفته-شريك-تجاري ("Ali as business partner")
+* 0-トヨタサプライチェーンでの購買者として ("unverified: Toyota as purchaser in supply chain")
+* 2-علي-بصفته-شريك-تجاري ("pairwise: Ali as business partner")
 
 COIA aliases are a high-ROI UX enhancement for users of digital wallets, password managers, verifiable credentials, cryptographic keys, and similar technologies.
 
@@ -176,15 +176,15 @@ Used in step
 ### Pronoun translations
 | Lang | Translation of "me" | Notes |
 |-----------|-------------------|-------|
-| ara | أنا | Standard first-person singular pronoun; works naturally in “أنا بصفتي <role>{scope}”. |
-| chi | 我 | Standard first-person pronoun; works for “我身为<role>{scope}”. |
-| eng | me | Standard English; “me as <role> at <org>”. |
-| fra | moi | Stressed pronoun; idiomatic for “moi en tant que <role>{scope}”. |
-| ger | ich | “Ich als <role>{scope}”; nominative first person. |
-| heb | אני | Standard first-person singular; “אני בתפקיד <role>{scope}”. |
+| ara | أنا | Standard first-person singular pronoun; works naturally in “أنا بصفتي &lt;role&gt;\{scope\}”. |
+| chi | 我 | Standard first-person pronoun; works for “我身为&lt;role&gt;\{scope\}”. |
+| eng | me | Standard English; “me as &lt;role&gt; at &lt;org&gt;”. |
+| fra | moi | Stressed pronoun; idiomatic for “moi en tant que &lt;role&gt;\{scope\}”. |
+| ger | ich | “Ich als &lt;role&gt;\{scope\}”; nominative first person. |
+| heb | אני | Standard first-person singular; “אני בתפקיד &lt;role&gt;\{scope\}”. |
 | ita | me stesso / io | “me stesso” works in reflexive/idiomatic sense if needed; “io” is nominative. |
 | jpn | 私 (わたし) | Standard first-person pronoun; polite/formal. |
-| kor | 나 | Standard first-person pronoun; “나 <role>{scope}로서”. |
-| por | eu | Standard first-person; “eu como <role>{scope}”. |
-| rus | я | Standard nominative; “я в роли <role>{scope}”. |
-| spa | yo | Standard first-person; “yo como <role>{scope}”. |
+| kor | 나 | Standard first-person pronoun; “나 &lt;role&gt;\{scope\}로서”. |
+| por | eu | Standard first-person; “eu como &lt;role&gt;\{scope\}”. |
+| rus | я | Standard nominative; “я в роли &lt;role&gt;\{scope\}”. |
+| spa | yo | Standard first-person; “yo como &lt;role&gt;\{scope\}”. |
