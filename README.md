@@ -139,7 +139,7 @@ alias | notes
 The following translations are recommended. Pull requests are gladly accepted to improve language coverage.
 
 ### Main template
-Used in step 
+Used in [Step 1](#1-choose-a-template).
 
 | Lang | Template translation | Notes |
 |-----------|----------------------|-------|
@@ -157,6 +157,7 @@ Used in step
 | spa | `{flags}{who}` como `{role}{scope}` | Spanish: role before organization; gender agreement may apply. |
 
 ### Scope template
+Used in [Step 3](#3-convert-scope-to-a-phrase).
 
 | Lang | Template | Example expansion |
 |-----------|--------------------|-----------------|
@@ -174,6 +175,8 @@ Used in step
 | spa | en `{org}` | en Acme |
 
 ### Pronoun translations
+Used if `who` is <var>me</var> [Step 2](#2-answer-three-questions).
+
 | Lang | Translation of "me" | Notes |
 |-----------|-------------------|-------|
 | ara | أنا | Standard first-person singular pronoun; works naturally in “أنا بصفتي &lt;role&gt;\{scope\}”. |
