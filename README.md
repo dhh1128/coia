@@ -109,6 +109,9 @@ A slightly more permissive version that tolerates alternatives to the ASCII hyph
 
 >^[\p{L}\p{N}]+([-\u2010\u2011\u2012\u2013\u2212][\p{L}\p{N}]+)*$
 
+## Implementation
+See reference code in [python](coia.py).
+
 ## Examples
 
 alias | notes
