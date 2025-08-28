@@ -1,6 +1,6 @@
 # Conventions for Opaque Identifier Aliases (COIA)
 ## Overview
-This spec explains [how to generate](#conventions) consistent, human-friendly aliases (labels) for hard-to-remember identifiers that refer to actors with complex identities (people, organizations, AI-based agents, and so forth).
+This spec explains [how to generate](#conventions) consistent, human-friendly aliases (labels) for hard-to-remember identifiers (AIDs, DIDs, public keys...) that refer to actors with complex identities (people, organizations, AI-based agents, and so forth).
 
 COIA aliases look like this:
 

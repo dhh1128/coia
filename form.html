@@ -7,34 +7,34 @@ title: Interactive COIA Tool
 
 <form id="aliasForm" onsubmit="return false;">
   <label>
-    Language:
-    <select id="lang"></select>
+    Language
+    <select style="width:12em"id="lang"></select>
   </label>
 
   <label>
-    Flags:
-    <input type="text" id="flags" placeholder="e.g. 02">
+    Flags
+    <input type="text" maxlength="3" style="width:4em" id="flags" placeholder="e.g. 02">
   </label>
 
   <label>
-    Who:
-    <input type="text" id="who" placeholder="Leave blank for 'me'">
+    Who
+    <input type="text" style="width:12em"id="who" placeholder="Leave blank for 'me'">
   </label>
 
   <label>
-    Role:
-    <input type="text" id="role" placeholder="Role description">
+    Role
+    <input type="text" style="width:12em" id="role" placeholder="Role description">
   </label>
 
   <label>
-    Scope:
-    <input type="text" id="scope" placeholder="Organization/Scope">
+    Scope
+    <input type="text" style="width:12em" id="scope" placeholder="Organization/Scope">
   </label>
 
   <button type="button" onclick="generateAlias()">Generate Alias</button>
 </form>
 
-<div id="outtext"></div>
+<div style="margin-top:2em; font-size: 1.5em; font-family: 'Courier New', Courier, monospace;" id="outtext"></div>
 
 <script>
 // Helper function
