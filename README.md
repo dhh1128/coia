@@ -1,18 +1,25 @@
 # Conventions for Opaque Identifier Aliases (COIA)
 ## Overview
-This spec explains [how to generate](#conventions) consistent, human-friendly aliases (labels) for hard-to-remember identifiers that refer to actors with complex identities (people, organizations, AI-based agents, and so forth). COIA aliases look like this:
+This spec explains [how to generate](#conventions) consistent, human-friendly aliases (labels) for hard-to-remember identifiers that refer to actors with complex identities (people, organizations, AI-based agents, and so forth).
+
+COIA aliases look like this:
 
 * cecilia-as-second-violin-at-vienna-symphony
-* moi-en-tant-que-directeur-général-chez-loréal ("Me as CEO at L'Oréal")
+* moi-en-tant-que-directeur-général-chez-l-oréal ("Me as CEO at L'Oréal")
 * 0-トヨタサプライチェーンでの購買者として ("unverified: Toyota as purchaser in supply chain")
 * 2-علي-بصفته-شريك-تجاري ("pairwise: Ali as business partner")
 
+### Reference implementation
+You can use an [interactive form](https://dhh1128.github.io/coia/form.html) to see what aliases are produced by this spec in various situations. You may also want to see or use reference implementations in [python](coia.py) (treat as the oracle), [javascript](coia.js), [java](Coia.java), [rust](coia.rs), [go](coia.go), and [swift](Coia.swift).
+
+### Why?
 COIA aliases are a high-ROI UX enhancement for users of digital wallets, password managers, verifiable credentials, cryptographic keys, and similar technologies.
 
 Implementing COIA is easy. Adopting COIA imposes no learning curve. Following COIA will improve clarity, confidence, utility, and safety. Since the conventions help software help its own users, they deliver value as soon as they're adopted in one app, regardless of when they spread throughout an ecosystem.
 
 For more about the theory behind these conventions, see [Opaque Identifier Aliases](https://dhh1128.github.io/papers/oia.html).
 
+### Version
 This is version 1 of COIA. If a future spec is released, the version number will change per [semver](https://semver.org) guidelines.
 
 ## Goals
@@ -21,9 +28,9 @@ COIA aims for aliases that have the following properties:
 1. Given a handful of examples and no explicit instruction, a user naturally develops accurate intuition about how the conventions work, and about best practices for managing identity.
 2. When a user encounters an alias that they created, they immediately and effortlessly remember who is identified by the aliased identifier, and the context in which that identifier is relevant. 
 3. Given a context and an identified actor, a user correctly predicts what a relevant alias created by them might look like, allowing them to search with confidence.
-4. The alias is a single token that processes correctly, with no special handling, in environments such as email, chat, URLs, word processors, log files, and markup languages.
+4. The alias is a single token that processes correctly, with no special handling, in environments such as email, chat, URLs, word processors, log files, and markup languages. It can also be read aloud with high confidence.
 
-Note that this spec aims to improve UX for the alias creator, NOT to make aliases interoperable with other humans, other languages, or other software. Aliases are like private nicknames; a stranger might overhear one, but they aren't created to be reshared. When Cecilia transacts with Bob on Bitcoin, she doesn't use local aliases to identify her address or Bob's; she uses raw addresses. Therefore, how Cecilia locally labels her address or Bob's address is only interesting to her.
+Note that this spec aims to improve UX *for the alias creator*, not to make aliases interoperable with *other* humans, *other* languages, or *other* software. Aliases are like private nicknames; a stranger might overhear one, but they aren't created to be reshared. When Cecilia transacts with Bob on Bitcoin, she doesn't use local aliases to publicly identify her address or Bob's; she uses raw addresses. Therefore, how Cecilia locally labels her address or Bob's address is only interesting to her.
 
 An aliases delivers the [human-friendliness in Zooko's triangle](https://dhh1128.github.io/papers/zh.html), but *only for the person who creates it*. For anyone else, an alias might be suggestive, but it is not a commitment to meaning. An alias can evolve without warning to suit its creator's fancy. It must be treated as a lookup convenience, not as an identifier in its own right, and it must be considered unresolvable outside the creator's context. Parsing someone else's aliases for strong meaning is a dangerous antipattern.
 
@@ -92,10 +99,11 @@ If Alice already has an alias `bob-as-ceo-at-beta-corp`, and is creating another
 #### 7. Normalize
 
 1. Convert the string to [Unicode's Normalization Form KC](https://www.unicode.org/reports/tr15/) (NFKC).
-2. Strip leading and trailing whitespace characters. (Unicode `Z*` character class plus a few orphans, `\p{White_Space}` covers all of them in regex.)
-3. Convert to lower case.
-4. Delete all punctuation characters (Unicode `P*` character classes, `\p{P}` in regex).
-5. Replace all remaining sequences of 1 or more whitespace characters with a single ASCII hyphen.
+2. Convert to lower case.
+3. Replace all hyphens, dashes, ampersands, periods, commas, apostrophes, and quotes with spaces.
+4. Strip leading and trailing whitespace characters. (Unicode `Z*` character class plus a few orphans, `\p{White_Space}` covers all of them in regex.)
+5. Delete all disallowed characters. These are characters that are lossy, ambiguous, or problematic in various processing contexts, including verbal communication. They include control characters, emoji, mathematical symbols, dingbats, and punctuation (other than the characters previously converted to spaces).
+6. Replace all remaining sequences of 1 or more whitespace characters with a single ASCII hyphen.
 
 ### Comparing
 

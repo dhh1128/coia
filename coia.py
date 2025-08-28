@@ -1,8 +1,12 @@
+# Public domain code written by Daniel Hardman (with a
+# little help from an AI friend). Tested and appears to
+# exactly match the intent of the spec.
+
 import unicodedata
 import regex as re
 
 # Constant for the “me” placeholder
-ME = ""
+ME_AS_ARG = ""
 
 # Example pronoun translation table
 PRONOUN_TRANSLATIONS = {
@@ -49,6 +53,54 @@ SCOPE_TEMPLATES = {
     "ru": " в {org}",
 }
 
+# normalize step 3: map selected punctuators to a space
+PUNCT_TO_SPACE_PATTERN = re.compile(r"""(
+      \p{Dash}                 # all hyphens/dashes
+    | \p{Quotation_Mark}       # all quotes/apostrophes
+    | [&﹠＆]                   # ampersand variants
+    | [.,‚،․。﹒．｡]           # periods and commas
+    | ['’‘‚‛＇]                # extra apostrophes/quotes
+)""", re.VERBOSE)
+
+# normalize step 4/6: whitespace handling
+WHITESPACE_PATTERN = re.compile(r"\p{White_Space}+")
+STRIP_WS_EDGES = re.compile(r"^\p{White_Space}+|\p{White_Space}+$")
+
+# normalize step 5: disallowed characters (delete)
+DISALLOWED_PATTERN = re.compile(r"""
+    [\p{Cc}\p{Cf}]   # control/format
+  | \p{Cs}           # surrogates
+  | \p{Co}           # private-use
+  | \p{Cn}           # unassigned
+  | \p{So}           # symbols, other (emoji, dingbats, etc.)
+  | \p{Sm}           # math symbols
+  | \p{Sc}           # currency symbols
+  | \p{Sk}           # modifier symbols
+  | \p{P}            # punctuation (anything not mapped to space)
+  | \p{M}            # combining marks (orphaned marks after NFKC)
+""", re.VERBOSE)
+
+def normalize_unicode(s: str) -> str:
+    # 1. NFKC normalization
+    s = unicodedata.normalize("NFKC", s)
+
+    # 2. lowercase
+    s = s.lower()
+
+    # 3. replace selected punctuators with space
+    s = PUNCT_TO_SPACE_PATTERN.sub(" ", s)
+
+    # 4. strip leading/trailing whitespace
+    s = STRIP_WS_EDGES.sub("", s)
+
+    # 5. delete disallowed characters (incl. orphaned combining marks)
+    s = DISALLOWED_PATTERN.sub("", s)
+
+    # 6. collapse whitespace into single ASCII hyphen
+    s = WHITESPACE_PATTERN.sub("-", s)
+
+    return s
+
 
 def create_alias(lang, flags, who, role, scope):
     # Trim all inputs
@@ -66,7 +118,7 @@ def create_alias(lang, flags, who, role, scope):
         raise ValueError("Flags must be at most 10 characters")
     
     # Substitute ME with language-specific pronoun
-    if who == ME:
+    if who == ME_AS_ARG:
         if lang not in PRONOUN_TRANSLATIONS:
             raise ValueError(f"No translation for 'me' in language {lang}")
         who = PRONOUN_TRANSLATIONS[lang]
@@ -92,27 +144,27 @@ def create_alias(lang, flags, who, role, scope):
     result = template.format(flags=flags, who=who, role=role, scope=scope)
     
     # Normalize
-    result = unicodedata.normalize("NFKC", result)
-    # Strip all leading/trailing Unicode whitespace
-    result = re.sub(r"^\p{White_Space}+|\p{White_Space}+$", "", result)
-    # Convert to lowercase
-    result = result.lower()
-    # Remove all punctuation
-    result = re.sub(r"\p{P}+", "", result)
-    # Replace all whitespace sequences with a single hyphen
-    result = re.sub(r"\p{White_Space}+", "-", result)
+    result = normalize_unicode(result)
     
     return result
 
 
 # Example usage
 if __name__ == "__main__":
+    import argparse
+    syntax = argparse.ArgumentParser(description="Generate a normalized alias.")
+    syntax.add_argument("--lang", required=False, default="fr", help="Language code (e.g., en, fr)")
+    syntax.add_argument("--flags", required=False, default="02", help="Flags (digits only)")
+    syntax.add_argument("--who", required=False, default=ME_AS_ARG, help="Who (use empty for 'me')")
+    syntax.add_argument("--role", required=False, default="Directeur général", help="Role description")
+    syntax.add_argument("--scope", required=False, default="Crédit Agricole", help="Scope/organization")
+    args = syntax.parse_args()
     alias = create_alias(
-        lang="fr",
-        flags="02",
-        who=ME,
-        role="Directeur général",
-        scope="Crédit Agricole"
+        lang=args.lang,
+        flags=args.flags,
+        who=args.who,
+        role=args.role,
+        scope=args.scope
     )
-    print(alias)
+    print(f"{args.lang}: {args.flags} {args.who} {args.role} {args.scope} -> {alias}")
     # Expected output: "02-moi-comme-directeur-général-à-crédit-agricole"

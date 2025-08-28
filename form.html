@@ -1,0 +1,87 @@
+---
+layout: default
+title: Interactive COIA Tool
+---
+
+<script src="coia.js"></script>
+
+<form id="aliasForm" onsubmit="return false;">
+  <label>
+    Language:
+    <select id="lang"></select>
+  </label>
+
+  <label>
+    Flags:
+    <input type="text" id="flags" placeholder="e.g. 02">
+  </label>
+
+  <label>
+    Who:
+    <input type="text" id="who" placeholder="Leave blank for 'me'">
+  </label>
+
+  <label>
+    Role:
+    <input type="text" id="role" placeholder="Role description">
+  </label>
+
+  <label>
+    Scope:
+    <input type="text" id="scope" placeholder="Organization/Scope">
+  </label>
+
+  <button type="button" onclick="generateAlias()">Generate Alias</button>
+</form>
+
+<div id="outtext"></div>
+
+<script>
+// Helper function
+function el(id) { return document.getElementById(id); }
+
+// Localized language display names
+const LANGUAGE_DISPLAY = {
+    en: "English",
+    fr: "Français",
+    es: "Español",
+    de: "Deutsch",
+    pt: "Português",
+    ja: "日本語",
+    zh: "中文",
+    ko: "한국어",
+    ar: "العربية",
+    he: "עברית",
+    ru: "Русский"
+};
+
+// Populate language drop-down
+function populateLanguages() {
+    const select = el("lang");
+    for (const [code, name] of Object.entries(LANGUAGE_DISPLAY)) {
+        const option = document.createElement("option");
+        option.value = code;
+        option.textContent = `${code} — ${name}`;
+        select.appendChild(option);
+    }
+}
+
+// Generate alias and show it
+function generateAlias() {
+    try {
+        const alias = createAlias(
+            el("lang").value,
+            el("flags").value,
+            el("who").value,
+            el("role").value,
+            el("scope").value
+        );
+        el("outtext").textContent = alias;
+    } catch (e) {
+        el("outtext").textContent = "Error: " + e.message;
+    }
+}
+
+// Initialize
+populateLanguages();
+</script>
