@@ -1,4 +1,4 @@
-// Public domain code ported from python by AI; Light testing confirms
+// Public domain code ported from python by AI; light testing confirms
 // basic functionality is working with believable input from several
 // languages (Portuguese, Russian). But use at your own risk. If anyone
 // uses the code heavily and confirms that it's working well, please raise
