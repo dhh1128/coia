@@ -1,7 +1,8 @@
-// Public domain code ported from python by AI; use as you'd
-// like but at your own risk. If anyone uses the code and
-// confirms that it's working well, please raise a
-// PR so I can remove the caveat.
+// Public domain code ported from python by AI. Light testing confirms
+// basic functionality is working with believable input from several
+// languages (Portuguese, Russian). But use at your own risk. If anyone
+// uses the code heavily and confirms that it's working well, please raise
+// a PR to remove this caveat.
 
 import java.text.Normalizer;
 import java.util.HashMap;

@@ -141,7 +141,7 @@ alias | notes
 `ich-als-vertriebsleiter-bei-münchener-rück` | me as Sales Manager at Münchener Rück
 `09-דוד-כמנהל-כספים-בבנק-הפועלים` | unverified test alias for David as Finance Manager at Bank Hapoalim
 
-
+<hr>
 
 ## Appendix A: Localization
 The following translations are recommended. Pull requests are gladly accepted to improve language coverage.
@@ -164,6 +164,24 @@ Used in [Step 1](#1-choose-a-template).
 | rus | `{flags}{who}` в роли `{role}{scope}` | Russian: role before context; case agreement may apply. |
 | spa | `{flags}{who}` como `{role}{scope}` | Spanish: role before organization; gender agreement may apply. |
 
+### Pronoun translations
+Used if `who` is <var>me</var> in [Step 2](#2-answer-three-questions).
+
+| Lang | Translation of "me" | Notes |
+|-----------|-------------------|-------|
+| ara | أنا | Standard first-person singular pronoun; works naturally in “أنا بصفتي &lt;role&gt;\{scope\}”. |
+| chi | 我 | Standard first-person pronoun; works for “我身为&lt;role&gt;\{scope\}”. |
+| eng | me | Standard English; “me as &lt;role&gt; at &lt;org&gt;”. |
+| fra | moi | Stressed pronoun; idiomatic for “moi en tant que &lt;role&gt;\{scope\}”. |
+| ger | ich | “Ich als &lt;role&gt;\{scope\}”; nominative first person. |
+| heb | אני | Standard first-person singular; “אני בתפקיד &lt;role&gt;\{scope\}”. |
+| ita | me stesso / io | “me stesso” works in reflexive/idiomatic sense if needed; “io” is nominative. |
+| jpn | 私 (わたし) | Standard first-person pronoun; polite/formal. |
+| kor | 나 | Standard first-person pronoun; “나 &lt;role&gt;\{scope\}로서”. |
+| por | eu | Standard first-person; “eu como &lt;role&gt;\{scope\}”. |
+| rus | я | Standard nominative; “я в роли &lt;role&gt;\{scope\}”. |
+| spa | yo | Standard first-person; “yo como &lt;role&gt;\{scope\}”. |
+
 ### Scope template
 Used in [Step 3](#3-convert-scope-to-a-phrase).
 
@@ -181,21 +199,3 @@ Used in [Step 3](#3-convert-scope-to-a-phrase).
 | por | na/ no `{org}` | na Acme / no Acme |
 | rus | в `{org}` | в Acme |
 | spa | en `{org}` | en Acme |
-
-### Pronoun translations
-Used if `who` is <var>me</var> [Step 2](#2-answer-three-questions).
-
-| Lang | Translation of "me" | Notes |
-|-----------|-------------------|-------|
-| ara | أنا | Standard first-person singular pronoun; works naturally in “أنا بصفتي &lt;role&gt;\{scope\}”. |
-| chi | 我 | Standard first-person pronoun; works for “我身为&lt;role&gt;\{scope\}”. |
-| eng | me | Standard English; “me as &lt;role&gt; at &lt;org&gt;”. |
-| fra | moi | Stressed pronoun; idiomatic for “moi en tant que &lt;role&gt;\{scope\}”. |
-| ger | ich | “Ich als &lt;role&gt;\{scope\}”; nominative first person. |
-| heb | אני | Standard first-person singular; “אני בתפקיד &lt;role&gt;\{scope\}”. |
-| ita | me stesso / io | “me stesso” works in reflexive/idiomatic sense if needed; “io” is nominative. |
-| jpn | 私 (わたし) | Standard first-person pronoun; polite/formal. |
-| kor | 나 | Standard first-person pronoun; “나 &lt;role&gt;\{scope\}로서”. |
-| por | eu | Standard first-person; “eu como &lt;role&gt;\{scope\}”. |
-| rus | я | Standard nominative; “я в роли &lt;role&gt;\{scope\}”. |
-| spa | yo | Standard first-person; “yo como &lt;role&gt;\{scope\}”. |
