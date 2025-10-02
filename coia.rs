@@ -1,7 +1,15 @@
-// Public domain code ported from python by AI; use as you'd
-// like but at your own risk. If anyone uses the code and
-// confirms that it's working well, please raise a
-// PR so I can remove the caveat.
+// Public domain code ported from python by AI; Light testing confirms
+// basic functionality is working with believable input from several
+// languages (Portuguese, Russian). But use at your own risk. If anyone
+// uses the code heavily and confirms that it's working well, please raise
+// a PR to remove this caveat.
+
+// IMPORTANT NOTE: THIS CODE CONTAINS MANY UNICODE STRING CONSTANTS AND CAN 
+// BE MANGLED SUBTLY IF YOU COPY/PASTE IT IN A BROWSER. DOWNLOADING THE FILE
+// DIRECTLY SHOULD BE LOSSLESS. TO TEST WHETHER MANGLING HAS HAPPENED, CHECK
+// THE punct_to_space REGEX AS AN EXAMPLE ABOUT 50 LINES BELOW. YOUR IDE SHOULD
+// SHOW THAT IT ENDS WITH SOME SMART QUOTE CHARACTERS; IT SHOULD *NOT*
+// DISPLAY ACCENTED LATIN CHARACTERS INSIDE IT.
 
 // add to Cargo.toml
 // [dependencies]
