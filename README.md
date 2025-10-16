@@ -80,7 +80,7 @@ If `scope` is interesting enough to require a value other than the empty string 
 
 #### 4. Choose flags
 
-Flags are signals that remind a user about important semantics for the identifier they're aliasing. Each semantic possibility is represented as a single ASCII digit. If no special semantics apply, `flags` becomes an empty string &mdash; the identifier is verified, public, and usable in production. Otherwise, it expands to one or more digits (with the digits in numerical order), followed by a space: `02 `. The following semantic meanings have predefined flag characters:
+Flags are signals that remind a user about important semantics for the identifier they're aliasing. They make [intent boundaries](https://dhh1128.github.io/papers/intent-boundaries.html) explicit, guaranteeing that users and their software both understand where protections are appropriate. Each semantic possibility is represented as a single ASCII digit. If no special semantics apply, `flags` becomes an empty string &mdash; the identifier is verified, public, and usable in production. Otherwise, it expands to one or more digits (with the digits in numerical order), followed by a space: `02 `. The following semantic meanings have predefined flag characters:
 
 char | meaning
 --- | ---
