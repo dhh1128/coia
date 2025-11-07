@@ -76,7 +76,7 @@ public struct Coia {
         // 4. strip leading/trailing whitespace
         result = result.trimmingCharacters(in: .whitespacesAndNewlines)
         // 5. delete disallowed characters
-        let disallowedPattern = #"[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}]"#
+        let disallowedPattern = #"[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}\p{Lm}]"#
         result = result.replacingOccurrences(of: disallowedPattern, with: "", options: .regularExpression)
         // 6. collapse whitespace into single ASCII hyphen
         let whitespacePattern = #"\s+"#

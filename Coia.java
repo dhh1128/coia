@@ -71,7 +71,7 @@ public class Coia {
     private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s+");
     private static final Pattern STRIP_WS_EDGES = Pattern.compile("^\\s+|\\s+$");
     private static final Pattern DISALLOWED_PATTERN = Pattern.compile(
-        "[\\p{Cc}\\p{Cf}\\p{Cs}\\p{Co}\\p{Cn}\\p{So}\\p{Sm}\\p{Sc}\\p{Sk}\\p{P}\\p{M}]",
+        "[\\p{Cc}\\p{Cf}\\p{Cs}\\p{Co}\\p{Cn}\\p{So}\\p{Sm}\\p{Sc}\\p{Sk}\\p{P}\\p{M}\\p{Lm}]",
         Pattern.UNICODE_CHARACTER_CLASS
     );
 

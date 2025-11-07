@@ -85,6 +85,7 @@ DISALLOWED_PATTERN = re.compile(r"""
   | \p{Sk}           # modifier symbols
   | \p{P}            # punctuation (anything not mapped to space)
   | \p{M}            # combining marks (orphaned marks after NFKC)
+  | \p{Lm}           # Modifier letters (ʿ ʾ ʰ ʷ ʸ etc.)
 """, re.VERBOSE)
 
 def normalize_unicode(s: str) -> str:
