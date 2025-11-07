@@ -89,7 +89,7 @@ fn normalize_unicode(s: &str) -> String {
 
     // 5. Delete disallowed characters
     let disallowed = Regex::new(
-        r#"[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}]"#
+        r#"[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}\p{Lm}]"#
     ).unwrap();
     let s = disallowed.replace_all(&s, "");
 

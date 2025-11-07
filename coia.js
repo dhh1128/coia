@@ -58,7 +58,7 @@ const SCOPE_TEMPLATES = {
 const PUNCT_TO_SPACE_PATTERN = /[\p{Dash}\p{Quotation_Mark}&﹠＆.,‚،․。﹒．｡'’‘‚‛＇]/gu;
 const WHITESPACE_PATTERN = /\p{White_Space}+/gu;
 const STRIP_WS_EDGES = /^\p{White_Space}+|\p{White_Space}+$/gu;
-const DISALLOWED_PATTERN = /[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}]/gu;
+const DISALLOWED_PATTERN = /[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}\p{Lm}]/gu;
 
 function normalizeUnicode(str) {
     // 1. NFKC normalization

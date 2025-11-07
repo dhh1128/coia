@@ -70,7 +70,7 @@ var (
 	punctToSpacePattern = regexp.MustCompile(`[\p{Pd}\p{Pi}\p{Pf}\p{Ps}\p{Pe}&﹠＆.,‚،․。﹒．｡'’‘‚‛＇]`)
 	whitespacePattern   = regexp.MustCompile(`\s+`)
 	stripWSEdges        = regexp.MustCompile(`^\s+|\s+$`)
-	disallowedPattern   = regexp.MustCompile(`[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}]`)
+	disallowedPattern   = regexp.MustCompile(`[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Cn}\p{So}\p{Sm}\p{Sc}\p{Sk}\p{P}\p{M}\p{Lm}]`)
 )
 
 // normalizeUnicode normalizes a string similarly to Python version
