@@ -1,0 +1,8 @@
+[package]
+name = "coia"
+version = "2.0.0"
+edition = "2021"
+
+[dependencies]
+unicode-normalization = "0.1"
+unicode-properties = { version = "0.1", features = ["general-category"] }

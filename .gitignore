@@ -161,3 +161,10 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# Reference-implementation build output. Each impl/ port is compiled and run by
+# conformance.sh; none of what that produces belongs in the repo.
+impl/rust/target/
+impl/java/*.class
+impl/swift/runvectors
+impl/swift/diff/*.o
