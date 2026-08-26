@@ -20,7 +20,10 @@ Implementing COIA is easy. Adopting COIA imposes no learning curve. Following CO
 For more about the theory behind these conventions, see [Opaque Identifier Aliases](https://dhh1128.github.io/papers/oia.html).
 
 ### Version
-This is version 1 of COIA. If a future spec is released, the version number will change per [semver](https://semver.org) guidelines.
+This is version 1 of COIA. **It has been superseded by [COIA 2.0](../README.md)**, and is
+preserved here unchanged for the aliases already minted under it. A 1.x alias and a 2.0
+alias for the same inputs generally differ; [CHANGES](../CHANGES.md) lists every difference
+and why it was made.
 
 ## Goals
 COIA aims for aliases that have the following properties:
