@@ -1,6 +1,6 @@
 # COIA 2.0 — Conventions for Opaque Identifier Aliases
 
-*Draft. Supersedes COIA 1.x. See [CHANGES](CHANGES.md) for what moved and why.*
+*Supersedes COIA 1.x. See [CHANGES](CHANGES.md) for what moved and why.*
 
 Opaque identifiers — DIDs, KERI AIDs, SSH and PGP keys, payment addresses, UUIDs,
 passkeys, account numbers — are hard for people to remember, speak, compare and search.

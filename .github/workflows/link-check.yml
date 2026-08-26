@@ -1,18 +1,30 @@
 name: check links in markdown files
 
+# Action versions are pinned for their JavaScript runtime, not their features.
+# GitHub deprecated the node20 runtime that actions/checkout@v4 and
+# lychee-action@v1 both ran on, so those emit a deprecation warning on every run
+# and will eventually stop working. Before bumping either, check what a tag
+# actually runs on rather than trusting the version number:
+#
+#   curl -sL https://raw.githubusercontent.com/<org>/<action>/<tag>/action.yml \
+#     | grep -E '^\s*using:'
+#
+# Verified 2026-08-26: actions/checkout is node24 from v5 onward (v7 is current);
+# lychee-action v2 is a composite action, so it carries no node runtime at all.
+
 on:
   repository_dispatch:
   workflow_dispatch:
   push:
-    
+
 jobs:
   link-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Run lychee link checker
-        uses: lycheeverse/lychee-action@v1.10.0
+        uses: lycheeverse/lychee-action@v2
         with:
           args: --verbose --exclude '(doi|genderit)\.org' *.md
           fail: true

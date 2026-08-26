@@ -1,6 +1,6 @@
 """COIA v2 reference implementation.
 
-Draft. The specification is README.md; the flag definitions are APPENDIX-D.md.
+The specification is README.md; the flag definitions are APPENDIX-D.md.
 Public domain.
 
 NOTE: contains Unicode string constants. Download rather than copy/paste from a
