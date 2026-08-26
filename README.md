@@ -14,13 +14,33 @@ what to put in it. Users invent ad hoc conventions or none at all.
 COIA is a convention for that label. It is not an identifier, not a namespace, and not a
 protocol.
 
-    cecilia-ceo-acme
+COIA aliases look like this:
+
+- `cecilia-second-violin-vienna-symphony`
+- `moi-directeur-général-l-oréal` — reflexive: *me, as CEO at L'Oréal*
+- `hans-müller-buchhalter` — no scope, because none is interesting here
+- `トヨタ-購買者-サプライチェーン,0` — *Toyota, purchaser, supply chain*, flagged unverified
+- `علي-شريك-تجاري,1` — *Ali, business partner*, flagged as intended for one relationship
+- `bob-payee-bitcoin,9` — flagged compromised, so it is shown but not used
+
+Every one of those is real output from the reference implementation, not an illustration.
+You can [generate your own](form.html) in the browser, or run any of the six ports — the
+oracle in [python](coia.py), plus [javascript](impl/js/coia.js), [go](impl/go/coia.go),
+[java](impl/java/Coia.java), [rust](impl/rust/src/lib.rs) and [swift](impl/swift/Coia.swift).
+All six are held byte-for-byte to the same vectors; see [IMPLEMENTATIONS](IMPLEMENTATIONS.md).
+
+The three fields are always the same three, in the same order, in every language: *who*,
+*role*, *scope* (§4.1). Anything after a comma is a flag (§6) — a safety-relevant warning
+about the identifier, not part of the label.
+
+Flag placement and the template both changed in 2.0:
+
     0-cecilia-as-ceo-at-acme      <- COIA 1.x
     cecilia-ceo-acme,0            <- COIA 2.0
 
 ## 1. Scope and non-goals
 
-An alias improves UX **for the person who creates it**. It is not a commitment to meaning
+An alias improves UX *for the person who creates it*. It is not a commitment to meaning
 for anyone else. An alias may change at its creator's whim, is unresolvable outside the
 creator's context, and parsing someone else's alias for strong meaning is a dangerous
 antipattern.
@@ -38,27 +58,27 @@ beyond the default order in §7.
 
 ## 2. Goals
 
-**G1 — intuitable.** Given a handful of examples and no explicit instruction, a user
+*G1 — intuitable.* Given a handful of examples and no explicit instruction, a user
 develops accurate intuition about how the conventions work.
 
-**G2 — memorable.** Encountering an alias they created, a user immediately remembers who
+*G2 — memorable.* Encountering an alias they created, a user immediately remembers who
 is identified and in what context.
 
-**G3 — predictable.** Given a context and an actor, a user correctly predicts what a
+*G3 — predictable.* Given a context and an actor, a user correctly predicts what a
 relevant alias might look like, and can therefore search with confidence.
 
-**G4 — resident.** An alias is usable as-is in the places aliases live: the label or
+*G4 — resident.* An alias is usable as-is in the places aliases live: the label or
 comment field of a wallet, password manager, config file, or certificate wizard; and the
 search box that finds it again.
 
-**G5 — durable in transit.** If an alias is copied elsewhere — an email, a chat message, a
+*G5 — durable in transit.* If an alias is copied elsewhere — an email, a chat message, a
 word processor, a log file, a shell, a spreadsheet, a Markdown document — it survives as a
 single token, and it can be read aloud with high confidence.
 
 G5 is a robustness claim, not an endorsement. §1 says aliases are not made to be reshared.
 G5 says that when one is copied anyway, it should not be mangled.
 
-**Known limitations of G5.** U+002D HYPHEN-MINUS has line-break class HY (UAX #14), so a
+*Known limitations of G5.* U+002D HYPHEN-MINUS has line-break class HY (UAX #14), so a
 renderer may break an alias at any hyphen, and double-click word selection does not select
 the whole token. Aliases MUST NOT be used as DNS labels when flagged (§6.6), nor as
 unescaped CSS or XML identifiers. In scriptio-continua languages (Chinese, Japanese, Thai)
@@ -68,42 +88,42 @@ an alias is a single unsegmented token and the read-aloud clause of G5 does not 
 
 An implementation MAY conform as any subset of:
 
-- **Normalizer** — implements §5. MUST export normalization as a callable operation;
+- *Normalizer* — implements §5. MUST export normalization as a callable operation;
   matching is defined in terms of it, and a consumer cannot implement §7 without it.
-- **Generator** — implements §4 and §6, and normalizes via a conforming Normalizer.
-- **Matcher** — implements §7, and normalizes via a conforming Normalizer.
+- *Generator* — implements §4 and §6, and normalizes via a conforming Normalizer.
+- *Matcher* — implements §7, and normalizes via a conforming Normalizer.
 
 Every MUST in this specification binds one of these three classes. A requirement that
 constrains a human's judgment, a user interface, or third-party software is written as
 guidance, not as a normative keyword.
 
-The golden vectors in Appendix C are normative. Where prose and vectors disagree, that is
-a defect in this specification; report it.
+The golden vectors in [Appendix C](APPENDIX-C.md) are normative. Where prose and vectors
+disagree, that is a defect in this specification; report it.
 
 ## 4. Creating an alias
 
 ### 4.1 Answer three questions
 
-- **who** — which subject the identifier refers to. Enough of a name to be meaningful in
+- *who* — which subject the identifier refers to. Enough of a name to be meaningful in
   the creator's context.
-- **role** — what responsibility, posture or behaviour distinguishes this facet of the
+- *role* — what responsibility, posture or behaviour distinguishes this facet of the
   subject's identity from other facets.
-- **scope** — which environment, context or relationship defines the role. MAY be empty
+- *scope* — which environment, context or relationship defines the role. MAY be empty
   when the context is unconstrained or uninteresting.
 
 Software often knows all three when it helps a user create or accept an identifier.
 
-For a **reflexive** alias — one whose subject is the creator — the caller supplies a
-distinguished sentinel rather than a name, and the generator substitutes the pronoun for
-the chosen language (Appendix A.2). A generator MUST NOT use the empty string as this
-sentinel: a caller that omits `who` by accident would otherwise mint a reflexive alias for
+For a *reflexive* alias — one whose subject is the creator — the caller supplies a
+distinguished sentinel rather than a name, and the generator substitutes the pronoun for the
+chosen language ([Appendix A.2](APPENDIX-A.md)). A generator MUST NOT use the empty string as
+this sentinel: a caller that omits `who` by accident would otherwise mint a reflexive alias for
 a third party's identifier.
 
 ### 4.2 Expand the template
 
 A generator MUST reject a language it does not support rather than falling back to
-another. Templates and their per-language rules are in Appendix A, which is **normative
-for the Generator class**.
+another. Templates and their per-language rules are in [Appendix A](APPENDIX-A.md), which is
+*normative for the Generator class*.
 
 Substitution MUST be a single simultaneous pass. Substituted values MUST NOT be rescanned,
 and MUST NOT be interpreted as replacement patterns. A `who` of `{role}` produces the
@@ -111,7 +131,7 @@ literal text; a `who` containing `$&` produces those characters.
 
 ### 4.3 Preconditions
 
-A generator MUST evaluate preconditions on **normalized** values, not raw input:
+A generator MUST evaluate preconditions on *normalized* values, not raw input:
 
 - `role` MUST be non-empty after normalization. (A raw `role` of `.` normalizes to the
   empty string and MUST be rejected, even though the raw value is non-empty.)
@@ -128,25 +148,25 @@ A generator's output MUST satisfy all of:
 
 ## 5. Normalization
 
-Normalization maps any string to canonical form. **Step order is normative.**
+Normalization maps any string to canonical form. *Step order is normative.*
 
 1. Apply Unicode Normalization Form KC (NFKC).
 2. Apply Unicode Default Case Folding — full, non-Turkic, no locale tailoring — using
-   the CASEFOLD table in Appendix B.6. An implementation MUST NOT substitute its
-   runtime's lowercase operation. Case mapping and case folding are different
+   the CASEFOLD table in [Appendix B.6](APPENDIX-B.md). An implementation MUST NOT substitute
+   its runtime's lowercase operation. Case mapping and case folding are different
    operations, and every runtime tested diverges somewhere: Go's `strings.ToLower`
    applies simple mapping (`İ` → `i` rather than `i` + U+0307) and omits the
    Final_Sigma rule; Java's `toLowerCase()` is locale-sensitive and yields `ıstanbul`
    under `tr_TR`; and no lowercase operation expands `ß` to `ss`.
 3. Process the result one character at a time, in order, and for each character:
-   - if it is in the **SPLIT** table (Appendix B.1), emit U+0020 SPACE;
+   - if it is in the *SPLIT* table ([Appendix B.1](APPENDIX-B.md)), emit U+0020 SPACE;
    - else if it is U+0640 ARABIC TATWEEL, emit nothing;
    - else if its General_Category is `Cf`, emit it only if §5.1 licenses it, else nothing;
    - else if its General_Category is `Me`, emit nothing;
    - else if its General_Category is `Mn` or `Mc`, emit it only if the previous emitted
      character was a letter, number or mark, else nothing;
    - else if its General_Category is `L*` or `N*`, emit it, applying the folds in
-     Appendix B.4;
+     [Appendix B.4](APPENDIX-B.md);
    - else emit nothing.
 4. Split the result on runs of U+0020 and join the parts with U+002D HYPHEN-MINUS,
    discarding empty parts.
@@ -166,12 +186,13 @@ N'Ko and others.
 Combining marks are kept, except enclosing marks (`Me`). The thirteen `Me` characters are
 enclosing circles, keycaps and Cyrillic liturgical number signs — decorative or symbolic,
 not part of any orthography, and the keycap is an emoji component that would otherwise
-survive where every other emoji is discarded. Deleting the other marks destroys Yoruba and Igbo tone marking and every
-Indic and Southeast Asian script, while protecting nothing: NFKC recomposes European
+survive where every other emoji is discarded. Deleting the other marks destroys Yoruba and Igbo
+tone marking and every Indic and Southeast Asian script, while protecting nothing: NFKC
+recomposes European
 diacritics into single codepoints before this step runs, so `José` and `João` are
 unaffected either way.
 
-**Compatibility decompositions are accepted as-is.** NFKC turns 94 letters into base plus
+*Compatibility decompositions are accepted as-is.* NFKC turns 94 letters into base plus
 mark. All 94 are Unicode composition exclusions, so no recomposition pass restores them,
 and this specification does not attempt one. Both spellings converge, so a user typing
 either finds the alias.
@@ -181,10 +202,10 @@ either finds the alias.
 U+200D ZERO WIDTH JOINER and U+200C ZERO WIDTH NON-JOINER are `Cf`, and are discarded
 except where orthography requires them. Modelled on IDNA2008 CONTEXTJ (RFC 5892 A.1, A.2):
 
-- **ZWJ** is kept if and only if the preceding character is in the **VIRAMA** table
-  (Appendix B.2).
-- **ZWNJ** is kept if and only if the preceding character is in the VIRAMA table, or both
-  neighbouring characters are in the **ARABIC** ranges (Appendix B.3).
+- *ZWJ* is kept if and only if the preceding character is in the *VIRAMA* table
+  ([Appendix B.2](APPENDIX-B.md)).
+- *ZWNJ* is kept if and only if the preceding character is in the VIRAMA table, or both
+  neighbouring characters are in the *ARABIC* ranges ([Appendix B.3](APPENDIX-B.md)).
 
 This preserves Sinhala `ශ්‍රී`, Devanagari conjuncts, Malayalam chillus, and Persian and
 Urdu word-internal breaks, while discarding a bare joiner between Latin letters, which
@@ -196,7 +217,7 @@ over-permits slightly, within Arabic-script text only.
 
 ## 6. Flags
 
-A flag qualifies **the alias assertion**: that the identifier is controlled by the party
+A flag qualifies *the alias assertion*: that the identifier is controlled by the party
 the creator calls `who`; that this party acts in the capacity `role`; and that it does so
 within the context `scope`. A flag qualifies all three components, not only the subject.
 
@@ -207,7 +228,7 @@ within the context `scope`. A flag qualifies all three components, not only the 
 `group1` holds registry digits (§6.3). `group2` is private use. Each group is a run of
 ASCII decimal digits. A generator MUST emit at most two groups.
 
-Both groups MUST have duplicates collapsed and MUST be sorted in **descending** numeric
+Both groups MUST have duplicates collapsed and MUST be sorted in *descending* numeric
 order, so that the most serious flag appears first. (COIA 1.x sorted ascending. See
 CHANGES.)
 
@@ -219,7 +240,7 @@ always a delimiter and never content.
 
 ### 6.2 Ordering of operations
 
-A matcher or reader MUST split flag groups off **before** normalizing the body. The
+A matcher or reader MUST split flag groups off *before* normalizing the body. The
 reverse order destroys the delimiter.
 
 On input, a reader MUST accept U+3001, U+060C and U+FF0C as group delimiters in addition
@@ -243,12 +264,12 @@ ASCII equivalent; a reader MUST accept any Unicode decimal digit.
     9  compromised    positive evidence that the wrong party controls it
 
 Full definitions, including what sets and clears each flag and what an application must
-decide for itself, are in Appendix D.
+decide for itself, are in [Appendix D](APPENDIX-D.md).
 
 Digits are ordered by seriousness, ascending. This ordering carries meaning: a reader
 encountering an unrecognized digit MAY use its position as a severity hint.
 
-**Absence is never a guarantee.** For every flag, absence means only that the flag was not
+*Absence is never a guarantee.* For every flag, absence means only that the flag was not
 set; it never asserts the negation. An application MUST NOT render an absent flag as a
 positive assurance.
 
@@ -266,9 +287,9 @@ judged the remaining risk not worth tracking.
 
 `4` is set by software from facts it can derive, and cleared by a deliberate acceptance of
 the identified weakness. Because those facts remain true after acceptance, software
-re-checking them will observe them again. **An implementation MUST have a policy governing
-when `4` is re-set. This specification does not define one**; see Appendix D.4 for a
-non-normative example.
+re-checking them will observe them again. *An implementation MUST have a policy governing
+when `4` is re-set. This specification does not define one*; see [Appendix D.4](APPENDIX-D.md)
+for a non-normative example.
 
 `4` does not travel between applications: it is the only flag whose presence depends on
 local policy rather than on facts about the world.
@@ -292,14 +313,14 @@ the delimiter appears only on flagged aliases, this is self-enforcing.
 
 A query is normalized (§5) and its flag groups discarded before comparison.
 
-**Predicate.** A matcher MUST report a match if and only if every term of the normalized
+*Predicate.* A matcher MUST report a match if and only if every term of the normalized
 query is a substring of the normalized, flag-stripped alias, where a term is a
 hyphen-delimited part of the normalized query. Term order does not matter.
 
 Substring rather than segment comparison, because in scriptio-continua languages the whole
 alias is a single segment and segment comparison could not find it by any word inside it.
 
-**Order.** A matcher MUST return matches ordered by, in priority order:
+*Order.* A matcher MUST return matches ordered by, in priority order:
 
 1. the number of query terms matching a whole segment, descending;
 2. the position of the earliest matching term, ascending;
@@ -318,7 +339,7 @@ by segment count, which is biased the other way.
 There is no minimum query length. A single-character query matching most of a corpus is
 correct behaviour for incremental search, and CJK names are routinely one character.
 
-**Uniqueness is out of scope.** Two identical aliases for different identifiers are not a
+*Uniqueness is out of scope.* Two identical aliases for different identifiers are not a
 lookup failure: the user searches, receives both, and chooses. COIA 1.x described an
 optional numeric suffix; it was never implemented and is removed. See CHANGES.
 
@@ -363,10 +384,10 @@ outside the conformance classes.
 
 This specification uses semantic versioning, with these meanings.
 
-**MAJOR** — any change to normalization, to the grammar, or to the meaning of an existing
+*MAJOR* — any change to normalization, to the grammar, or to the meaning of an existing
 flag digit. A stored alias may stop matching a freshly normalized query.
 
-**MINOR** — adding a language, assigning a reserved flag digit, or clarifying prose. A
+*MINOR* — adding a language, assigning a reserved flag digit, or clarifying prose. A
 MINOR change MUST NOT change the alias produced for any previously valid input.
 
 Implementations MUST record the COIA version and the Unicode version used to produce an
@@ -380,8 +401,18 @@ when this specification changes.
 
 ## Appendices
 
-- **A** — Localization: templates, pronouns, per-language rules. Normative for generators.
-- **B** — Character tables: SPLIT, VIRAMA, ARABIC, folds. Normative.
-- **C** — Golden vectors. Normative.
-- **D** — Flag definitions and application guidance.
-- **CHANGES** — what moved from 1.x and why.
+- [Appendix A](APPENDIX-A.md) — Localization: the template, the reflexive pronouns, and why
+  there are no per-language rules. Normative for generators.
+- [Appendix B](APPENDIX-B.md) — Character tables: SPLIT, VIRAMA, ARABIC, folds, CASEFOLD.
+  Normative.
+- [Appendix C](APPENDIX-C.md) — Golden vectors. Normative.
+- [Appendix D](APPENDIX-D.md) — Flag definitions and application guidance.
+
+And, non-normative:
+
+- [CHANGES](CHANGES.md) — what moved from COIA 1.x, and why.
+- [IMPLEMENTATIONS](IMPLEMENTATIONS.md) — the six reference ports and how to run them
+  against the vectors.
+- [NATIVE-LANGUAGE-REVIEW](NATIVE-LANGUAGE-REVIEW.md) — the review that produced
+  [Appendix A](APPENDIX-A.md), including the limitations that argue against it.
+- [`v1/`](v1/README.md) — COIA 1.x, preserved.

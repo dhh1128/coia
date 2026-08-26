@@ -1,6 +1,6 @@
 """COIA v2 reference implementation.
 
-Draft, tracking the decisions in ../adjudication.md and ../flag-registry.md.
+Draft. The specification is README.md; the flag definitions are APPENDIX-D.md.
 Public domain.
 
 NOTE: contains Unicode string constants. Download rather than copy/paste from a

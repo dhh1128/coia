@@ -1,14 +1,16 @@
 # Appendix C — Golden vectors
 
-**Normative.** Where this specification's prose and these vectors disagree, that is a
+*Normative.* Where this specification's prose and these vectors disagree, that is a
 defect; report it.
 
 The machine-readable set is `vectors.json`. Each entry carries the section it tests, so a
 failing vector points at the rule it came from.
 
-Total: 132. Vectors are authored **from the prose**, not captured from an implementation's output. An
-implementation is not the oracle — that is how COIA 1.x's specification and its Appendix A
-drifted apart without either being anyone's bug.
+Total: 136 — 69 normalize, 26 generate, 11 parse, 17 match, 10 reject, 3 search.
+
+Vectors are authored *from the prose*, not captured from an implementation's output. An
+implementation is not the oracle — that is how COIA 1.x's specification and its
+[Appendix A](APPENDIX-A.md) drifted apart without either being anyone's bug.
 
 ## Sections
 

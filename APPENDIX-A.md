@@ -1,6 +1,6 @@
 # Appendix A — Localization
 
-**Normative for the Generator class.** In COIA 1.x this appendix was "recommended", which
+*Normative for the Generator class.* In COIA 1.x this appendix was "recommended", which
 meant two implementations could both fully conform and be required to disagree, and no
 generation vector was well-formed. It is normative now.
 
@@ -23,7 +23,7 @@ Normalization (§5) does the rest, so an alias body is three hyphen-separated fi
     ar  علي / شريك / أرامكو                ->  علي-شريك-أرامكو
     he  אלי כהן / מנהל כספים / בנק הפועלים  ->  אלי-כהן-מנהל-כספים-בנק-הפועלים
 
-**No language contributes a connector, preposition, particle, article or case ending.** A
+*No language contributes a connector, preposition, particle, article or case ending.* A
 generator that emits one does not conform.
 
 ## A.1 The reflexive pronoun
@@ -59,12 +59,12 @@ including the limitations that argue against this conclusion, is in
 [NATIVE-LANGUAGE-REVIEW.md](NATIVE-LANGUAGE-REVIEW.md). Two
 findings collapsed what had been a page of per-language rules.
 
-**Bare apposition was proposed independently in every language.** Not as a least-bad hedge
+*Bare apposition was proposed independently in every language.* Not as a least-bad hedge
 but as the register the artifact wants — an alias is a business card, a name badge, an
 org-chart entry, and a bare noun sequence is what all three use in all eleven.
 
-The deeper reason it works is that **a connector is precisely the part of a template that
-must know what a template cannot know.** A preposition governs case (Russian `в` takes the
+The deeper reason it works is that *a connector is precisely the part of a template that
+must know what a template cannot know.* A preposition governs case (Russian `в` takes the
 prepositional), demands an article and a gender (German `bei der`, Portuguese `na`/`no`),
 contracts (French `à` + `le`), or selects an allomorph from the preceding sound (Korean
 `-(으)로서`). Every one of those is agreement with an organization name, and organization
@@ -76,17 +76,17 @@ Apposition also asserts no relation, which is a real limitation and not only a v
 `alice-parent-bob` does not say which of the two is the parent. That is accepted. The label
 is private, §7 matching is order-independent, and its only reader already knows.
 
-**The order is `who role scope`, and it is not a per-language question.** Unanimous in 8 of
+*The order is `who role scope`, and it is not a per-language question.* Unanimous in 8 of
 11 languages — Spanish, German, French, Portuguese, Italian, Russian, Arabic, Hebrew —
 across 33 reviews with no dissent, and the majority in 35 of all 47. Only Japanese, Korean
-and Chinese proposed anything else, and **they did not agree with each other**: Japanese
+and Chinese proposed anything else, and *they did not agree with each other*: Japanese
 proposed `scope role who`, Korean `scope who role`, and Chinese produced four different
 orders across eight reviews with no majority at all, while still putting `who` first in
 five of them. There is no coherent alternative to adopt, only three mutually inconsistent
 ones, each carried by 2-of-3 or less.
 
-The cost is stated plainly rather than buried: **Japanese and Korean use an order their own
-reviewers ranked second.** A 2-of-3 split contradicted by its nearest typological neighbour
+The cost is stated plainly rather than buried: *Japanese and Korean use an order their own
+reviewers ranked second.* A 2-of-3 split contradicted by its nearest typological neighbour
 is weak evidence against 33 unanimous reviews, and the gain is large — one template, no
 per-language rules, nothing to get wrong across eleven languages and six implementations.
 But it is an override, and if it is ever revisited, this paragraph is why.
@@ -95,21 +95,21 @@ But it is an override, and if it is ever revisited, this paragraph is why.
 
 Recorded so none of it is rediscovered as a missing feature.
 
-- **Korean `-(으)로서` allomorphy.** `로서` when `(codepoint - 0xAC00) mod 28` is 0 (no
-  batchim) or 8 (ㄹ), else `으로서`. **The rule was correct** — a reviewer confirmed it
+- *Korean `-(으)로서` allomorphy.* `로서` when `(codepoint - 0xAC00) mod 28` is 0 (no
+  batchim) or 8 (ㄹ), else `으로서`. *The rule was correct* — a reviewer confirmed it
   against the examples — and it is gone because the particle it served is gone. All three
   Korean reviewers read `김철수 사장으로서 삼성에서` as a clause missing its predicate
   rather than as a label.
-- **Russian `в`/`во`** before certain consonant clusters. Already dead before this round:
+- *Russian `в`/`во`* before certain consonant clusters. Already dead before this round:
   apposition had removed its only call site.
-- **The connectors.** en `as`/`at`, es `como`/`en`, de `als`, fr `comme`, pt `como`, it
+- *The connectors.* en `as`/`at`, es `como`/`en`, de `als`, fr `comme`, pt `como`, it
   `come`/`presso`, ru `как`, ja `の`/`として`/`での`, ko `-(으)로서`/`에서`, ar `بصفة`/`في`,
   he `בתפקיד`/`ב`, zh `作为`/`在`.
-- **The Arabic capacity marker `بصفة`** was the uninflected construct form, chosen because
+- *The Arabic capacity marker `بصفة`* was the uninflected construct form, chosen because
   the possessive forms (`بصفتي`, `بصفته`, `بصفتها`) inflect for the subject and COIA 1.x
   shipped inconsistent ones in its template and its examples. It was the best of the marked
   options, and reviewers rejected all of them as formal filler (حشو) in a label.
-- **The Arabic preposition `في`** went a round earlier, for a different reason: it means
+- *The Arabic preposition `في`* went a round earlier, for a different reason: it means
   "inside", right for an organization and wrong for everything else. `أليس بصفة أم في بوب`
   reads as "Alice as mother inside Bob", and §4.1 scope is any environment, context or
   relationship.

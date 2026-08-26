@@ -1,8 +1,8 @@
 # Implementations
 
-Six, all held to the same normative vectors (Appendix C).
+Six, all held to the same normative vectors ([Appendix C](APPENDIX-C.md)).
 
-    ./conformance.sh          run the 132 vectors against all six
+    ./conformance.sh          run the 136 vectors against all six
     python3 difftest.py N     feed N generated inputs to all six, compare byte-for-byte
 
 | language | location | NFKC from | notes |
@@ -24,17 +24,18 @@ needs a JSON parser. Regenerate rather than hand-edit anything named `data.*` or
 
 Vectors are fixed and were written by someone who already knew what the answers should be.
 The differential test feeds the same generated inputs to all six and compares byte-for-byte;
-it found a divergence at 3,000 inputs that 132 vectors and 300 differential inputs both
+it found a divergence at 3,000 inputs that the 132 vectors of the day and 300 differential
+inputs both
 missed — Go's `strings.ToLower` applies simple case mapping, so `İ` folded to `i` there and
 to `i` + U+0307 everywhere else. That is what moved case folding from "lowercase, then patch
 the differences" to a complete normative table.
 
-Current status: 132/132 vectors in all six, and 25,000 differential inputs with no divergence.
+Current status: 136/136 vectors in all six, and 25,000 differential inputs with no divergence.
 
 ## Known gaps
 
-- `coia.rs` in the repository root is the COIA 1.x implementation and **cannot run** —
+- `coia.rs` in the repository root is the COIA 1.x implementation and *cannot run* —
   the Rust `regex` crate rejects `\p{Cs}`, which its committed pattern contains. The v2
   Rust implementation here is a rewrite, not a port.
 - Language templates other than English are provisional pending native review; see
-  Appendix A.
+  [Appendix A](APPENDIX-A.md).
