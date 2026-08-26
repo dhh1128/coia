@@ -99,7 +99,8 @@ def normalize(s):
 #                                   ->  田中太郎-経理担当者-三菱銀行
 #
 # WHY THERE IS NOTHING TO LOCALIZE. Native-speaker review, 2026-08-25, 47
-# independent reviews across 11 languages and 7 models from 5 labs. Two findings
+# independent reviews across 11 languages, one flagship model from each of 7 labs.
+# Two findings
 # collapsed the appendix that used to live here:
 #
 # 1. Bare apposition was proposed independently in EVERY language. A connector

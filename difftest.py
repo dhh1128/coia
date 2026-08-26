@@ -30,7 +30,7 @@ env = dict(os.environ, PATH=f"{JDK}:{os.environ['PATH']}")
 
 RUNNERS = [
  ("python", ".",           [PYBIN, "difftest_run.py"]),
- ("node",   "impl/js",     ["node", "difftest.mjs"]),
+ ("node",   "impl/js",     ["node", "difftest.js"]),
  ("go",     "impl/go",     ["go", "run", "./diffcmd"]),
  ("java",   "impl/java",   ["java", "-cp", ".", "DiffTest"]),
  ("rust",   "impl/rust",   ["cargo", "run", "-q", "--bin", "difftest"]),

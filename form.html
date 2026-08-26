@@ -1,0 +1,97 @@
+---
+layout: default
+title: Interactive COIA 2.0 Tool
+---
+
+<p>Answer the three questions. The alias is built from your answers by the
+<a href="impl/js/coia.js">JavaScript reference port</a>, running in your browser — nothing is
+sent anywhere. This page implements <a href="README.md">COIA 2.0</a>; the 1.x tool is
+<a href="v1/form.html">still here</a> and produces different output.</p>
+
+<form id="aliasForm" onsubmit="return false;">
+  <label>
+    Language
+    <select style="width:12em" id="lang"></select>
+  </label>
+
+  <label>
+    Who
+    <input type="text" style="width:12em" id="who" placeholder="Leave blank for 'me'">
+  </label>
+
+  <label>
+    Role
+    <input type="text" style="width:12em" id="role" placeholder="ceo, parent, supplier…">
+  </label>
+
+  <label>
+    Scope
+    <input type="text" style="width:12em" id="scope" placeholder="Optional: acme, a game…">
+  </label>
+
+  <label>
+    Flags
+    <input type="text" maxlength="8" style="width:5em" id="flags" placeholder="e.g. 90">
+  </label>
+
+  <label>
+    Private flags
+    <input type="text" maxlength="8" style="width:5em" id="pflags" placeholder="e.g. 7">
+  </label>
+</form>
+
+<div style="margin-top:2em; font-size:1.5em; font-family:'Courier New', Courier, monospace; word-break:break-all;" id="outtext"></div>
+<div style="margin-top:0.75em; color:#666;" id="note"></div>
+
+<script type="module">
+import { createAlias, ME, PRONOUNS } from "./impl/js/coia.js";
+
+const el = id => document.getElementById(id);
+
+// Endonyms: a speaker looking for their own language should see it written the
+// way they write it.
+const LANGUAGE_DISPLAY = {
+  en: "English",  es: "Español", de: "Deutsch",  fr: "Français",
+  pt: "Português", it: "Italiano", ru: "Русский", ja: "日本語",
+  zh: "中文",      ko: "한국어",   ar: "العربية",  he: "עברית",
+};
+
+for (const code of Object.keys(PRONOUNS)) {
+  const o = document.createElement("option");
+  o.value = code;
+  o.textContent = `${code} — ${LANGUAGE_DISPLAY[code] ?? code}`;
+  el("lang").appendChild(o);
+}
+
+function render() {
+  const who = el("who").value.trim();
+  const reflexive = who === "";
+  try {
+    el("outtext").textContent = createAlias(
+      el("lang").value,
+      reflexive ? ME : who,
+      el("role").value,
+      el("scope").value,
+      el("flags").value,
+      el("pflags").value,
+    );
+    // The single most surprising property of 2.0 is worth showing rather than
+    // asserting: the language selector changes nothing unless the alias is
+    // reflexive, because the pronoun is the only thing a language contributes.
+    el("note").textContent = reflexive
+      ? `Reflexive: "who" is you, so the language supplies the pronoun "${PRONOUNS[el("lang").value]}".`
+      : "Not reflexive, so the language changes nothing — every language produces this same alias.";
+  } catch (e) {
+    el("outtext").textContent = "";
+    el("note").textContent = "Error: " + e.message;
+  }
+}
+
+for (const id of ["lang", "who", "role", "scope", "flags", "pflags"]) {
+  el(id).addEventListener("input", render);
+}
+el("role").value = "ceo";
+el("scope").value = "acme";
+el("who").value = "cecilia";
+render();
+</script>

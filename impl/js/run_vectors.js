@@ -1,5 +1,5 @@
-import { VECTORS } from "./data.mjs";
-import * as coia from "./coia.mjs";
+import { VECTORS } from "./data.js";
+import * as coia from "./coia.js";
 
 const SEP = "\u0001", MEMARK = "\u0000ME";
 const fails = [];

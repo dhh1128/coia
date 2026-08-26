@@ -12,7 +12,7 @@ run() {
   else echo "FAIL"; echo "$out" | head -20; rc=1; fi
 }
 run python .    "$PY run_vectors.py"
-run javascript  impl/js    "node run_vectors.mjs"
+run javascript  impl/js    "node run_vectors.js"
 run go          impl/go    "go run ./cmd"
 run java        impl/java  "javac -encoding UTF-8 -d . Coia.java Data.java RunVectors.java && java -cp . RunVectors"
 run rust        impl/rust  "cargo run -q --bin coia"

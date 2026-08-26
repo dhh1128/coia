@@ -1,6 +1,6 @@
 // COIA v2 reference implementation (JavaScript).
 // Tables and vectors are generated; see ../../gencode.py.
-import { SPLIT, VIRAMA, ARABIC, FOLDGAP, DIGITS } from "./data.mjs";
+import { SPLIT, VIRAMA, ARABIC, FOLDGAP, DIGITS } from "./data.js";
 
 const TATWEEL = 0x0640, ZWJ = 0x200d, ZWNJ = 0x200c;
 const FOLD = new Map([[0x02bc, 0x02bb]]);

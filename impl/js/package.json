@@ -1,0 +1,5 @@
+{
+  "type": "module",
+  "private": true,
+  "_comment": "Marks .js in this directory as ESM. The files were .mjs until 2026-08-26; they were renamed because GitHub Pages does not reliably serve .mjs with a JavaScript MIME type, and /form.html imports this port directly. Node needs this file to keep treating them as modules."
+}

@@ -53,7 +53,10 @@ a list where `ن` buries them.
 ## A.2 Why there is nothing else to localize
 
 Eleven languages were put to a panel of native-speaker model reviewers on 2026-08-25: 47
-independent reviews, seven models from five labs, no reviewer shown another's answer. Two
+independent reviews, seven models from seven labs — DeepSeek, Moonshot, Z.ai, Alibaba,
+OpenAI, Google and Mistral — no reviewer shown another's answer. The full report,
+including the limitations that argue against this conclusion, is in
+[NATIVE-LANGUAGE-REVIEW.md](NATIVE-LANGUAGE-REVIEW.md). Two
 findings collapsed what had been a page of per-language rules.
 
 **Bare apposition was proposed independently in every language.** Not as a least-bad hedge

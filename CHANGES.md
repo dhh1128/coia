@@ -20,7 +20,8 @@ spaces, scope omitted when empty. `cecilia-as-ceo-at-acme` becomes `cecilia-ceo-
 along with everything else — it is not privileged here.
 
 Eleven languages went to a panel of native-speaker model reviewers: 47 independent reviews,
-seven models, five labs. Bare apposition was proposed independently in all eleven, and the
+one flagship model from each of seven labs. Bare apposition was proposed independently
+in all eleven, and the
 order `who role scope` was unanimous in 8 of them across 33 reviews with no dissent. The
 three that dissented did not agree with each other. Appendix A.2 carries the evidence and
 A.3 lists everything this deleted.
