@@ -2,10 +2,6 @@
 
 *Draft. Supersedes COIA 1.x. See [CHANGES](CHANGES.md) for what moved and why.*
 
-*COIA 1.x is preserved unchanged in [`v1/`](v1/README.md), including its reference
-implementations and its browser demo. A 1.x alias and a 2.0 alias for the same inputs
-generally differ; §10 explains why every one of those differences is MAJOR.*
-
 Opaque identifiers — DIDs, KERI AIDs, SSH and PGP keys, payment addresses, UUIDs,
 passkeys, account numbers — are hard for people to remember, speak, compare and search.
 Management tools paper over this with a free-text label field and offer no guidance about

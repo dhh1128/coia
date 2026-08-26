@@ -3,6 +3,10 @@
 Every change here is MAJOR under §10. A COIA 1.x alias and a COIA 2.0 alias for the same
 inputs generally differ.
 
+COIA 1.x is preserved unchanged in [`v1/`](v1/README.md) — the specification, its reference
+implementations in six languages, and its browser demo — so that aliases already minted
+under it still have something to point at.
+
 ## Migration is safe in one specific sense
 
 A 1.x reader cannot parse a 2.0 flag block (it looks for a leading digit run before the
